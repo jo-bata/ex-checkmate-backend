@@ -13,22 +13,22 @@ router.post('/login', function(req, res) {
   conn.query(sql, [user.id], function(err, results) {
     if(err) {
       console.log(err);
-      req.status(500).json(config.status.sc500);
+      res.status(500).json(config.status.sc500);
     } else if(results.length === 0) {
       console.log('New user access !');
       const sql = 'INSERT INTO users SET ?';
       conn.query(sql, user, function(err, results) {
         if(err) {
           console.log(err);
-          req.status(500).json(config.status.sc500);
+          res.status(500).json(config.status.sc500);
         } else {
           console.log('Add new user !');
-          req.status(200).json(config.status.sc200);
+          res.status(200).json(config.status.sc200);
         }
       });
     } else {
       console.log('Existing user access !');
-      req.status(200).json(config.status.sc200);
+      res.status(200).json(config.status.sc200);
     }
   });
 });
